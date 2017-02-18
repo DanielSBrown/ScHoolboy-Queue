@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+   <link href = "/static/styles/style.css" rel = "stylesheet" type = "text/css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+ <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"> </script>
+  <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+
+</head>
+    <body>
+        <h1 class = header align = "center">ScHoolboy Queue</h1>
+        <div id="buttons" align = "center" class = "divcenter" class = "center">
+    <label> <input id="query" type="text"/><button id="search-button" onclick="googleApiClientReady()">Search</button></label>
+    
+    <h1 id = "header" class = "header" style = "display: none">Search Results</h1>
+    <ul align = "center" id="results"></ul>
+     <div  class = "divcenter" style="border:0px;" id = "videos"> 
+ 
+    </div>           
+<script>
+
+
+function googleApiClientReady(){
+
+    gapi.client.setApiKey('AIzaSyARvwirFktEIi_BTaKcCi9Ja-m3IEJYIRk');
+    gapi.client.load('youtube', 'v3', function() {
+        keyWordsearch();
+        });
+}
+
+
+
+
+function keyWordsearch() {
+	$('#videos').html('');
+  $('#videos').show();
+  
+	var q = $('#query').val();
+  var request = gapi.client.youtube.search.list({
+    q: q,
+    part: 'snippet'
+  });
+
+  request.execute(function(results) {
+    $('#videos').append("<form action='/room/add/' method = 'POST' id = 'image' name = 'image'>");
+    for(var i in results.items) {
+      var item = results.items[i];
+      console.log('[%s] Title: %s', item.id.videoId,item.snippet.title);
+      var pic = item.snippet.thumbnails.default.url;
+      pic = "<input type = 'image' name = 'submit' src = " + pic + " border = '0' alt = 'Submit'><br/>"
+      $('#videos').append(pic + item.snippet.title + "<br/><br/>");
+    }
+    $('#videos').append("</form>");
+    
+  });
+ }
+
+function redirect() {
+  alert("YOOO");
+}
+// function makeRequest(){
+//     var q = $('#query').val();
+//     var request = gapi.client.youtube.search.list({
+//             q: q,
+//             part: 'snippet', 
+//             maxResults: 10
+//     });
+//     request.execute(function(response)  {
+//             $('#results').empty()
+//             var srchItems = response.result.items; 
+
+//             $.each(srchItems, function(index, item){
+//             vidTitle = item.snippet.title;  
+//             alert(vidTitle);
+//             vidThumburl =  item.snippet.thumbnails.default.url;                 
+//             vidThumbimg = '<pre><img id="thumb" src="'+vidThumburl+'" alt="No  Image  Available." style="width:204px;height:128px"></pre>';                   
+
+//             $('#results').append('<pre>' + vidTitle + vidThumbimg +   '</pre>');                      
+//     })  
+//   })  
+// }
+ 
+  </script>
+  
+</div>
+</body>
+</html>

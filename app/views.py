@@ -66,6 +66,11 @@ def landing():
     """ landing page """
     return render_template('landing.html')
 
+@app.route('/query/')
+def query():
+    """query page"""
+    return render_template('query.html')
+
 # login page
 # needs to verify user and password validity
 @app.route('/login/', methods=['GET', 'POST'])
