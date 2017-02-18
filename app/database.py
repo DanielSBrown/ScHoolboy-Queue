@@ -1,17 +1,32 @@
+"""
+Basic Database Functionality
+TODO:
+    Refactor into an object
+    Rearrange the queue
+"""
 from sqlite3 import connect
 
 
 def connect_to_db():
+    """
+    Wrapper function for db connection
+    """
     conn = connect('ScHoolboy_Queue.sqlite')
     return conn
 
 
 def disconnect_db(conn):
+    """
+    Wrapper function to kill the db
+    """
     conn.close()
     return
 
 
 def create_new_room(conn, room_name):
+    """
+    Wrapper Function for creation of a new room
+    """
     cursor = conn.cursor()
     cursor.execute('DROP TABLE IF EXISTS {}'.format(room_name))
     cursor.execute('CREATE TABLE {} (song TEXT, pos INTEGER)'.format(room_name))
@@ -19,6 +34,9 @@ def create_new_room(conn, room_name):
 
 
 def add_new_song(conn, room_name, song):
+    """
+    Wrapper Function for adding songs to existing queue for a room
+    """
     cursor = conn.cursor()
     cursor.execute('SELECT COUNT(*) FROM {}'.format(room_name))
     count = cursor.fetchone()[0]
@@ -28,11 +46,27 @@ def add_new_song(conn, room_name, song):
 
 
 def delete_table(conn, room_name):
+    """
+    Wrapper function to delete table when a room is finished
+    """
     cursor = conn.cursor()
     cursor.execute('DROP TABLE IF EXISTS {}'.format(room_name))
     conn.commit()
 
+
+def fetch_current_songs(conn, room_name):
+    """
+    App wants to have information on the currently playing and next song queued
+    """
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM {} ORDER BY pos ASC LIMIT 2'.format(room_name))
+    return [row[0] for row in cursor.fetchall()]
+
+
 def get_next_song(conn, room_name):
+    """
+    Delete the currently queued song and move the remaining songs up
+    """
     cursor = conn.cursor()
     cursor.execute('SELECT * from {} where pos=0'.format(room_name))
     song = cursor.fetchone()[0]
