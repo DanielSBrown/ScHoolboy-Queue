@@ -1,4 +1,7 @@
+#!/usr/bin/python
 from flask import Flask, redirect, url_for, request, render_template, make_response
+import sqlite3 as sql
+import database
 
 app = Flask(__name__)
 
@@ -31,6 +34,11 @@ def setcookie():
         resp.set_cookie('name', name)
         resp.set_cookie('pw', pw)
         return redirect('/profile/')
+
+@app.route('/signup/')
+def signup():
+    return render_template('signup.html')
+
 if __name__ == '__main__':
     app.debug = True
     app.run(debug=True)

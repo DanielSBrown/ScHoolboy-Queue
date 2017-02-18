@@ -39,3 +39,9 @@ def get_next_song(conn, room_name):
     cursor.execute('DELETE FROM {} WHERE pos=0'.format(room_name))
     cursor.execute('UPDATE {} SET pos = pos - 1'.format(room_name))
     return song
+
+def create_user(conn, user_name):
+    cursor = conn.cursor()
+    cursor.execute('DROP TABLE IF EXISTS {}'.format(user_name))
+    cursor.execute('CREATE TABLE {} (user TEXT, pass INTEGER)'.format(user_name))
+    conn.commit()
