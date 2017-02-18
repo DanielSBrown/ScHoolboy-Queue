@@ -33,6 +33,7 @@ def queue_song():
     """
     Add a song to the queue
     """
+    print(request.get_data())
     room = request.values['room']
     song = request.values['song_url']
     conn = connect_to_db()

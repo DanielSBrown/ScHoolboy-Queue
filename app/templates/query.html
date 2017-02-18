@@ -15,13 +15,11 @@
     <label> <input id="query" type="text"/><button id="search-button" onclick="googleApiClientReady()">Search</button></label>
     
     <h1 id = "header" class = "header" style = "display: none">Search Results</h1>
-    <ul align = "center" id="results"></ul>
+    
      <div  class = "divcenter" style="border:0px;" id = "videos"> 
- 
+          
     </div>           
 <script>
-
-
 function googleApiClientReady(){
 
     gapi.client.setApiKey('AIzaSyARvwirFktEIi_BTaKcCi9Ja-m3IEJYIRk');
@@ -29,13 +27,12 @@ function googleApiClientReady(){
         keyWordsearch();
         });
 }
-
-
-
-
 function keyWordsearch() {
+
 	$('#videos').html('');
+
   $('#videos').show();
+
   
 	var q = $('#query').val();
   var request = gapi.client.youtube.search.list({
@@ -44,43 +41,27 @@ function keyWordsearch() {
   });
 
   request.execute(function(results) {
-    $('#videos').append("<form action='/room/add/' method = 'POST' id = 'image' name = 'image'>");
+    var html = "<form action='/room/add/' method = 'POST' name = 'form' id = 'form'><br/>";
+    
+    var j = 0;
     for(var i in results.items) {
       var item = results.items[i];
       console.log('[%s] Title: %s', item.id.videoId,item.snippet.title);
       var pic = item.snippet.thumbnails.default.url;
-      pic = "<input type = 'image' name = 'submit' src = " + pic + " border = '0' alt = 'Submit'><br/>"
-      $('#videos').append(pic + item.snippet.title + "<br/><br/>");
+      pic = "<img src= " + pic + " ><br/>"
+
+      html += pic +  item.snippet.title;
+      html += "<input type = 'radio' name = 'radio' value = \"" + item.id.videoId + "\"/><br/><br/>";
+      j++;
     }
-    $('#videos').append("</form>");
-    
+    html += "<input type = 'submit' value = 'submit'>";
+    html += "</form>";
+     $('#videos').append(html);
   });
+ 
  }
 
-function redirect() {
-  alert("YOOO");
-}
-// function makeRequest(){
-//     var q = $('#query').val();
-//     var request = gapi.client.youtube.search.list({
-//             q: q,
-//             part: 'snippet', 
-//             maxResults: 10
-//     });
-//     request.execute(function(response)  {
-//             $('#results').empty()
-//             var srchItems = response.result.items; 
 
-//             $.each(srchItems, function(index, item){
-//             vidTitle = item.snippet.title;  
-//             alert(vidTitle);
-//             vidThumburl =  item.snippet.thumbnails.default.url;                 
-//             vidThumbimg = '<pre><img id="thumb" src="'+vidThumburl+'" alt="No  Image  Available." style="width:204px;height:128px"></pre>';                   
-
-//             $('#results').append('<pre>' + vidTitle + vidThumbimg +   '</pre>');                      
-//     })  
-//   })  
-// }
  
   </script>
   
