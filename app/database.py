@@ -63,6 +63,13 @@ def fetch_current_songs(conn, room_name):
     return [row[0] for row in cursor.fetchall()]
 
 
+def get_all_songs(conn, room_name):
+    """ Get an ordered queue of all songs for a room """
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM {} ORDER BY pos ASC'.format(room_name))
+    return [row[0] for row in cursor.fetchall()]
+
+
 def get_next_song(conn, room_name):
     """
     Delete the currently queued song and move the remaining songs up
@@ -73,6 +80,13 @@ def get_next_song(conn, room_name):
     cursor.execute('DELETE FROM {} WHERE pos=0'.format(room_name))
     cursor.execute('UPDATE {} SET pos = pos - 1'.format(room_name))
     return song
+
+def check_table_exists(conn, room_name):
+    """ Returns a boolean if a table with the given name exists """
+    cursor = conn.cursor()
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='{}'".format(
+        room_name))
+    return bool(cursor.fetchone())
 
 def create_user(conn, user_name):
     cursor = conn.cursor()
