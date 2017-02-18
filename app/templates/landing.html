@@ -3,15 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>ScHoolboy Queue</title>
+    <style>
+    div {
+        width: 70%;
+        border: 25px black;
+        background-color: #F7F8E8;
+        padding: 25px;
+        margin: 25px;
+        font-family: "Helvetica";
+        font-style: normal
+        font-size: 20px;
+    }
+    .divcenter {
+        margin: auto;
+        text-align: center;
+        width: 80%;
+        border: 3px solid black;
+        padding : 10px;
+    }
+    .button {
+        font-family: "Helvetica", cursive, sans-serif;
+        font-weight: :bold;
+        font-style:normal;
+        font-size: 15px;
+        color: black;
+        appearance: button;
+        text-align:center;
+    }
+    a.button{
+        font-family: "Helvetica", cursive, sans-serif;
+        font-weight: bold;
+        font-style:normal;
+        font-size: 15px;
+        color: black;
+        appearance: button;
+        text-align: center;
+    }
+    .center {
+        text-align:center;
+    }
+    .header {
+        font-family: "Helvetica";
+        font-weight: bold;
+        font-style: normal;
+    }
+    body {
+        text-align: center;
+    }
+    </style>
 </head>
     <body>
-        <h1>ScHoolboy Queue</h1>
-        <span>Home</span>
-        <a href="/login/">Log In</a>
-        <a href="/signup/">Sign Up</a>
+        <h1 class = header align = "center">ScHoolboy Queue</h1>
+        <br/>
+        <span style = "font-size: 25px; font-family: 'Helvetica'">Home</span>
+        <br/>
+        <br/>
+        <a href="/login/" style = "text-align: center"  ><button class = "button" type = button>Log In</button></a>     
+        <a href="/signup/" style = "text-align: center" ><button class = "button" type = button> Sign Up</button></a>
+        <br/>
+        <br/>
+        <div id = "Group" class = "divcenter" align = "center">
+        <form action ="http://localhost:5000/group/" method = "POST">
         <form action ="group/" method = "POST">
             <p>Group Code <input type = "text" name = "groupcode" /></p>
-            <p><input type="submit" value = "Enter" /></p>
+            <p><input class = "button" type="submit" value = "Enter" /></p>
         </form>
+        </div>
     </body>
 </html>

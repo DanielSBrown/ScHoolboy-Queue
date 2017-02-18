@@ -1,14 +1,72 @@
 <!DOCTYPE html>
 <html>
+   <head>
+      <title>Login Page</title>
+      <style>
+    div {
+        width: 70%;
+        border: 25px black;
+        background-color: #F7F8E8;
+        padding: 25px;
+        margin: 25px;
+        font-family: "Helvetica";
+        font-style: normal
+        font-size: 20px;
+    }
+    .divcenter {
+        margin: auto;
+        text-align: center;
+        width: 80%;
+        border: 3px solid black;
+        padding : 10px;
+    }
+    .button {
+        font-family: "Helvetica", cursive, sans-serif;
+        font-weight: :bold;
+        font-style:normal;
+        font-size: 15px;
+        color: black;
+        appearance: button;
+        text-align:center;
+    }
+    a.button{
+        font-family: "Helvetica", cursive, sans-serif;
+        font-weight: bold;
+        font-style:normal;
+        font-size: 15px;
+        color: black;
+        appearance: button;
+        text-align: center;
+    }
+    .center {
+        text-align:center;
+    }
+    .header {
+        font-family: "Helvetica";
+        font-weight: bold;
+        font-style: normal;
+    }
+    body {
+        text-align: center;
+    }
+    </style>
+    </head>
    <body>
-      <h1>ScHoolboy Queue</h1>
-      <a href="/">Home</a>
-      <span>Log In</span>
-      <a href="/signup/">Sign Up</a>
+      <h1 class = "header" align = "center">ScHoolboy Queue</h1>
+      <br/>
+      <span style = "font-size: 25px; font-family: 'Helvetica'">Log In</span>
+      <br/>
+      <br/>
+      <a href="/"><button class = "button" type = "button">Home</button></a>
+      <a href="/signup/"><button class = "button" type = "button">Sign Up</button></a>
+      <br/>
+      <br/>
+      <div id = "form" class = "divcenter" align = "center">
       <form action ="http://localhost:5000/setcookie/" method = "POST">
          <p>User Name <input type = "text" name = "username" /></p>
          <p>Password <input type = "password" name = "password" /></p>
          <p><input type="submit" value = "Enter" /></p>
       </form>
+      </div>
    </body>
 </html>
