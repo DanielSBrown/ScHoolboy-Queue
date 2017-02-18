@@ -1,16 +1,8 @@
 import sqlite3
 
-sqlite_file = 'my_first_db.sqlite'    # name of the sqlite database file
-table_name1 = 'Room'  # name of the table to be created
-table_name2 = 'Song'  # name of the table to be created
-new_field = 'ID' # name of the column
-field_type = 'text'  # column data type
-field_type_2 = 'text'
-field_type_3 = 'text'
-new_field_2 = 'Systems'
-new_field_3 = 'AdminList'
+
 # Connecting to the database file
-conn = sqlite3.connect(sqlite_file)
+conn = sqlite3.connect('ScHoolboy_Queue.sqlite')
 c = conn.cursor()
 
 # Creating a new SQLite table with 1 column
