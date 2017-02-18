@@ -1,26 +1,38 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>ScHoolboy Queue</title>
-   <link href = "/static/styles/style.css" rel = "stylesheet" type = "text/css" />
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </head>
-    <body>
-        <h1 class = header align = "center">ScHoolboy Queue</h1>
-        <br/>
-        <span style = "font-size: 25px; font-family: 'Helvetica'">Home</span>
-        <br/>
-        <br/>
-        <a href="/login/" style = "text-align: center"  ><button class = "button" type = button>Log In</button></a>     
-        <a href="/signup/" style = "text-align: center" ><button class = "button" type = button> Sign Up</button></a>
-        <br/>
-        <br/>
-        <div id = "Group" class = "divcenter" align = "center">
-        <form action ="http://localhost:5000/group/" method = "POST">
-        <form action ="group/" method = "POST">
-            <p>Group Code <input type = "text" name = "groupcode" /></p>
+    <body style="overflow-y: hidden">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-1"><h4>ScHoolboy Queue</h4></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-1" style="margin-top: 10px" style="margin-bottom: 10px"><a class="btn btn-primary" href="/login/" style = "text-align: center" style="">Log In</a></div>
+            <div class="col-md-1" style="margin-top: 10px" style="margin-bottom: 10px"><a class="btn btn-primary" href="/signup/" style = "text-align: center"  >Sign Up</a></div>
+            <div class="col-md-5"></div>
+        </div>
+    </div>
+
+    <div class="row" style="background: url(/static/styles/schoolboyq.jpg);background-size: 100%; margin: 0px; height: 1080px;background-repeat: no-repeat">
+    <div class="container-fluid" style="float: right;background-color: #5bc0de; height: 8%;padding: 1%;margin-bottom: 70%">
+        <form action ="/group/" method = "POST">
+            <p>Room Code <input type = "text" name = "groupcode" /></p>
             <p><input class = "button" type="submit" value = "Enter" /></p>
         </form>
-        </div>
+    </div>
+    </div>
+
+
+
     </body>
 </html>

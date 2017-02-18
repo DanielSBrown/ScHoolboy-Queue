@@ -91,5 +91,5 @@ def check_table_exists(conn, room_name):
 def create_user(conn, user_name):
     cursor = conn.cursor()
     cursor.execute('DROP TABLE IF EXISTS {}'.format(user_name))
-    cursor.execute('CREATE TABLE {} (user TEXT, pass INTEGER)'.format(user_name))
+    cursor.execute('CREATE TABLE {} (user TEXT, pass TEXT)'.format(user_name))
     conn.commit()

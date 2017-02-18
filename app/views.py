@@ -25,6 +25,7 @@ def new_room():
     conn = connect_to_db()
     create_new_room(conn, room_id)
     disconnect_db(conn)
+
     return jsonify(room=room_id)
 
 
