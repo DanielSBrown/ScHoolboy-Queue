@@ -6,7 +6,8 @@ import string
 from flask import jsonify, redirect, request, render_template, make_response
 from app import app
 from .database import connect_to_db, create_new_room, disconnect_db
-from .database import get_all_songs, check_table_exists
+from .database import get_all_songs, check_table_exists, fetch_current_songs
+from .database import add_new_song
 
 
 @app.route('/health/')
@@ -25,6 +26,37 @@ def new_room():
     create_new_room(conn, room_id)
     disconnect_db(conn)
     return jsonify(room=room_id)
+
+
+@app.route('/room/add/', methods=['POST'])
+def queue_song():
+    """
+    Add a song to the queue
+    """
+    room = request.values['room']
+    song = request.values['song_url']
+    conn = connect_to_db()
+    add_new_song(conn, room, song)
+    return redirect('/group/?groupcode={}'.format(room))
+
+
+@app.route('/queued/', methods=['GET'])
+def queued():
+    """
+    Fetches the two next songs queued for a room
+    """
+    room_id = request.values['room']
+    conn = connect_to_db()
+    queue = fetch_current_songs(conn, room_id)
+    disconnect_db(conn)
+    if not queue:
+        resp = {'room': room_id, 'current': False, 'next': False}
+    elif len(queue) == 1:
+        resp = {'room': room_id, 'current': queue[0], 'next': False}
+    else:
+        resp = {'room': room_id, 'current': queue[0], 'next': queue[1]}
+    return jsonify(**resp)
+
 
 
 # home page

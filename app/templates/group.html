@@ -6,6 +6,12 @@
 </head>
     <body>
       <h1>{{ groupcode }} Group</h1>
+      <form action='/room/add/' method='POST'>
+        Queue up a song: <br>
+        <input type='text' name='song_url'>
+        <input type='hidden' name='room' value='{{ groupcode }}'>
+        <input type='submit' value='Submit'>
+      </form>
       <ul>
         {% for song in queue %}
         <li>{{ song }}</li>
