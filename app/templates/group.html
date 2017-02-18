@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Your Group</title>
+    <title>Group -- {{ groupcode }}</title>
 </head>
     <body>
-        <h1>Your Group</h1>
+      <h1>{{ groupcode }} Group</h1>
+      <ul>
+        {% for song in queue %}
+        <li>{{ song }}</li>
+        {% endfor %}
+      </ul>
 
     </body>
 </html>
