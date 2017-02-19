@@ -29,13 +29,13 @@ def poll_and_wait(room, wait_time, api):
     endpoint = '{}/queued/?room={}'.format(api, room)
     next_end = '{}/room/pop/'.format(api)
     playtime = 0
-    initial = time()
+    initial = int(time())
     curr = None
     song = None
     queued = None
     next_song = ()
     while True:
-        if (time() - playtime) < initial and (time() - initial) % wait_time != 0:
+        if ((time() - playtime) < initial or curr is None) and (int(time()) - initial) % wait_time != 0:
             sleep(1)
             continue
         queue = requests.get(endpoint).json()
@@ -45,21 +45,24 @@ def poll_and_wait(room, wait_time, api):
         elif curr != queue['current']:
             curr = queue['current']
             file_name, playtime = download_song(curr)
-            print(file_name)
             song = play_song(file_name)
-            initial = time()
+            initial = int(time())
             # TO DO: Don't let people queue up same song twice
             if not queue['next']:
                 continue
             queued = queue['next']
             next_song = download_song(queued)
-        else:
+        elif queue['next'] and queued != queue['next']:
+            queued = queue['next']
+            next_song = download_song(queued)
+        elif time() - playtime > initial:
             song.stop()
             requests.post(next_end, data={'room': room})
             if queued:
                 song = play_song(next_song[0])
-                initial = time()
+                initial = int(time())
                 playtime = next_song[1]
+                curr = queued
                 queued = None
                 next_song = ()
 
