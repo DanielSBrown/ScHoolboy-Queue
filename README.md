@@ -2,11 +2,10 @@
 VTHacks IV -- Team Fully Torged
 ### Team: FULLY TORGED
 
-Purpose
-------
+## Purpose
 Every single person has a unique taste in music, so this can sometimes be a point of frustration when you are with other people and only listening to music that they like.
 
-Often, the solution is to have something akin to the Spotify queue -- One person has control of the music but others can request songs to be added to be listened to at a later data.
+Often, the solution is to have something akin to the Spotify queue. One person has control of the music but others can request songs to be added to be listened to at a later data.
 
 While this is often manageable between friends, there are still several pain points:
 1. Someone often needs to give up their phone to play music from
@@ -20,8 +19,7 @@ The goal of ScHoolboy Queue (sHouts to my mans) is to provide a remotely hosted,
 
 With a central web server that communicates with distributed nodes in the form of `rooms,` ScHoolboyQueue allows a user to play a continuous stream of music straight from YouTube.
 
-Usage
-------
+## Usage
 The application consists of two integral parts:
 1. [A centralized web site](www.ScHoolboyQueue.org/) used to manage the queues for the individual rooms
 1. Distributed rooms/nodes that handle the playing on the music 
