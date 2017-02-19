@@ -111,7 +111,7 @@ def login():
 @app.route('/group/', methods=['GET', 'POST'])
 def group():
     """ The main page of the app where each individual queue will be managed """
-    groupcode = request.values['groupcode']
+    groupcode = request.values.get('groupcode', "")
     conn = connect_to_db()
     if not check_table_exists(conn, groupcode):
         return redirect('/')
