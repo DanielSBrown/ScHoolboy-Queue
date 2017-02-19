@@ -3,6 +3,7 @@ from time import sleep, time
 import youtube_dl
 import requests
 import vlc
+from os import remove
 # from mutagen.mp3 import MP3
 
 YDL_OPTS = {
@@ -34,13 +35,14 @@ def poll_and_wait(room, wait_time, api):
     song = None
     queued = None
     next_song = ()
+    file_name = None
     while True:
-        if ((time() - playtime) < initial or curr is None) and (int(time()) - initial) % wait_time != 0:
+        if (time() - playtime < initial or curr is None) and (int(time()) - initial) % wait_time != 0:
             sleep(1)
             continue
+        sleep(1)
         queue = requests.get(endpoint).json()
         if not queue['current']:
-            sleep(1)
             continue
         elif curr != queue['current']:
             curr = queue['current']
@@ -52,19 +54,24 @@ def poll_and_wait(room, wait_time, api):
                 continue
             queued = queue['next']
             next_song = download_song(queued)
+            continue
         elif queue['next'] and queued != queue['next']:
             queued = queue['next']
             next_song = download_song(queued)
+            continue
         elif time() - playtime > initial:
             song.stop()
             requests.post(next_end, data={'room': room})
+            remove(file_name)
             if queued:
+                file_name = next_song[0]
                 song = play_song(next_song[0])
                 initial = int(time())
                 playtime = next_song[1]
                 curr = queued
                 queued = None
                 next_song = ()
+            continue
 
 
 def play_song(name):
