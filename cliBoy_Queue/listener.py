@@ -42,8 +42,32 @@ def poll_and_wait(room, wait_time, api):
             continue
         sleep(1)
         queue = requests.get(endpoint).json()
-        if not queue['current']:
+        if not queue['current'] and song:
+            song.stop()
+            remove(file_name)
+            curr = None
+            song = None
+            playtime = 0
             continue
+        elif not queue['current']:
+            continue
+        elif curr != queue['current'] and song:
+            song.stop()
+            remove(file_name)
+            if queued == queue['current']:
+                file_name = next_song[0]
+                song = play_song(file_name)
+                initial = int(time())
+                playtime = next_song[1]
+                curr = queued
+                queued = None
+                next_song = None
+                continue
+            else:
+                curr = None
+                queued = None
+                next_song = ()
+                continue
         elif curr != queue['current']:
             curr = queue['current']
             file_name, playtime = download_song(curr)
