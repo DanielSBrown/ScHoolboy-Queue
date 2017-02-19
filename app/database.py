@@ -84,6 +84,7 @@ def get_next_song(conn, room_name):
 def check_table_exists(conn, room_name):
     """ Returns a boolean if a table with the given name exists """
     cursor = conn.cursor()
+    print(room_name)
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='{}'".format(
         room_name))
     return bool(cursor.fetchone())
