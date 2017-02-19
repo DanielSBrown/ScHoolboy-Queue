@@ -145,7 +145,9 @@ function query() {
 
     var item = results.items[0];
     var pic = item.snippet.thumbnails.default.url;
-    $('#videos').append("<tr style='color:#e2e2e2;font-size:16px'><th scope='row'><img src = " + pic + "><th/><td>" + item.snippet.title + "</td></tr>");
+    $('#videos').append("<tr style='color:#e2e2e2;font-size:16px'><th scope='row'><img src = "
+      + pic + "><th/><td>" + item.snippet.title + "</td><td>" +
+      "<a href='/queue/remove/{{ groupcode }}/" + item.id.videoId + "'>Remove</a>" + "</td></tr>");
 {#    $('#videos').append("<img src = " + pic + "><br/>" + item.snippet.title + "<br/><br/>");#}
   });
   });
