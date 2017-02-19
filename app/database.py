@@ -79,6 +79,7 @@ def get_next_song(conn, room_name):
     song = cursor.fetchone()[0]
     cursor.execute('DELETE FROM {} WHERE pos=0'.format(room_name))
     cursor.execute('UPDATE {} SET pos = pos - 1'.format(room_name))
+    conn.commit()
     return song
 
 def check_table_exists(conn, room_name):
