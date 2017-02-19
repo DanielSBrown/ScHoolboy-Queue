@@ -83,20 +83,30 @@ def get_next_song(conn, room_name):
     return song
 
 def delete_song(conn, room_name, vid_id):
+    '''
+    Delete all occurrences of a song from the database and update the position
+    of all remaining songs
+    '''
     cursor = conn.cursor()
+    cursor.execute('SELECT * FROM {} WHERE song=?'.format(room_name), (vid_id,))
+    pos = cursor.fetchone()[1]
+    print(pos)
     cursor.execute('DELETE FROM {} WHERE song=?'.format(room_name), (vid_id,))
+    cursor.execute('UPDATE {} SET pos = pos - 1 WHERE pos > ?'.format(room_name), (pos,))
     conn.commit()
     return
 
 def check_table_exists(conn, room_name):
     """ Returns a boolean if a table with the given name exists """
     cursor = conn.cursor()
-    print(room_name)
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='{}'".format(
         room_name))
     return bool(cursor.fetchone())
 
 def create_user(conn, user_name):
+    '''
+    Create User in table
+    '''
     cursor = conn.cursor()
     cursor.execute('DROP TABLE IF EXISTS {}'.format(user_name))
     cursor.execute('CREATE TABLE {} (user TEXT, pass TEXT)'.format(user_name))
