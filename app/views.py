@@ -21,7 +21,9 @@ def new_room():
     Generates a new random room id and creates the table in the database
     """
     room_id = ''.join(random.SystemRandom().choice(
-        string.ascii_uppercase + string.digits) for _ in range(6))
+        string.ascii_uppercase))
+    room_id += ''.join(random.SystemRandom().choice(
+        string.ascii_uppercase + string.digits) for _ in range(5))
     conn = connect_to_db()
     create_new_room(conn, room_id)
     disconnect_db(conn)
@@ -33,7 +35,7 @@ def queue_song():
     """
     Add a song to the queue
     """
-    print(request.get_data())
+
     room = request.values['room']
     song = request.values['song_url']
     conn = connect_to_db()
