@@ -60,7 +60,8 @@ def poll_and_wait(room, wait_time, api):
                 song = play_song(next_song[0])
                 initial = time()
                 playtime = next_song[1]
-
+                queued = None
+                next_song = ()
 
 
 def play_song(name):
