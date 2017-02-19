@@ -10,7 +10,7 @@ Often, the solution is to have something akin to the Spotify queue. One person h
 While this is often manageable between friends, there are still several pain points:
 
 1. Someone often needs to give up their phone to play music from
-..* If they keep their phone locked they will need to be continually asked to unlock it
+⋅⋅* If they keep their phone locked they will need to be continually asked to unlock it
 1. The content is limited by the library of the streaming provider
 1. Generally only a single person can queue up music at a time
 1. Everyone who has access to the queue has the ability to rearrage or remove anything they want
