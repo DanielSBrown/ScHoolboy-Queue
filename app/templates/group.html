@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +7,8 @@
    <link href = "/static/styles/style.css" rel = "stylesheet" type = "text/css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
  <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"> </script>
-  <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+ 
+
 
 </head>
     <body>
@@ -21,6 +22,18 @@
           
     </div>           
 <script>
+$( window ).on( "load", function() {
+googleApiClientReady2();
+});
+  
+
+
+function googleApiClientReady2() {
+  gapi.client.setApiKey('AIzaSyARvwirFktEIi_BTaKcCi9Ja-m3IEJYIRk');
+    gapi.client.load('youtube', 'v3', function() {
+        query();
+        });
+}
 function googleApiClientReady(){
 
     gapi.client.setApiKey('AIzaSyARvwirFktEIi_BTaKcCi9Ja-m3IEJYIRk');
@@ -38,13 +51,12 @@ function keyWordsearch() {
   var q = $('#query').val();
   var request = gapi.client.youtube.search.list({
     q: q,
-    part: 'snippet'
+    part: 'snippet',
+    type: 'video'
   });
 
   request.execute(function(results) {
     var html = "<form action='/room/add/' method = 'POST' name = 'form' id = 'form'><br/>";
-    
-    var j = 0;
     for(var i in results.items) {
       var item = results.items[i];
       console.log('[%s] Title: %s', item.id.videoId,item.snippet.title);
@@ -53,7 +65,6 @@ function keyWordsearch() {
 
       html += pic +  item.snippet.title;
       html += "<input type = 'radio' name = 'song_url' value = \"" + item.id.videoId + "\"/><br/><br/>";
-      j++;
     }
      html += "<input type='hidden' name='room' value='{{ groupcode }}'>"
     html += "<input type = 'submit' value = 'submit'>";
@@ -65,12 +76,31 @@ function keyWordsearch() {
  
  }
 
+function query() {
+  $("li").each(function(index) {
+    var q = $(this).text();
+    var request = gapi.client.youtube.search.list({
+    q: q,
+    part: 'snippet',
+    type: 'video'
+  });
 
+  request.execute(function(results) {
+
+    var item = results.items[0];
+    var pic = item.snippet.thumbnails.default.url;
+    $('#videos').append("<img src = " + pic + "><br/>" + item.snippet.title + "<br/><br/>");
+  });
+  });
+  
+}
  
   </script>
-    <ul>
+   <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+    <ul id = "song" style="display:none">
+
         {% for song in queue %}
-        <li>{{ song }}</li>
+        <li >{{ song }}</li>
         {% endfor %}
       </ul>
   
