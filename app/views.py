@@ -34,6 +34,7 @@ def queue_song():
     """
     Add a song to the queue
     """
+    print(request.get_data())
     room = request.values['room']
     song = request.values['song_url']
     conn = connect_to_db()
@@ -66,6 +67,11 @@ def queued():
 def landing():
     """ landing page """
     return render_template('landing.html')
+
+@app.route('/query/')
+def query():
+    """query page"""
+    return render_template('query.html')
 
 # login page
 # needs to verify user and password validity
