@@ -38,7 +38,8 @@ def queue_song():
     """
 
     room = request.values['room']
-    song = request.values['song_url']
+    song = 'youtube.com/watch?v='
+    song += request.values['song_url']
     conn = connect_to_db()
     add_new_song(conn, room, song)
     return redirect('/group/?groupcode={}'.format(room))
