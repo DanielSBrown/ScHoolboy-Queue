@@ -82,6 +82,12 @@ def get_next_song(conn, room_name):
     conn.commit()
     return song
 
+def delete_song(conn, room_name, vid_id):
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM {} WHERE song=?'.format(room_name), (vid_id,))
+    conn.commit()
+    return
+
 def check_table_exists(conn, room_name):
     """ Returns a boolean if a table with the given name exists """
     cursor = conn.cursor()
