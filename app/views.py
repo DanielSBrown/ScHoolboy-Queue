@@ -7,7 +7,7 @@ from flask import jsonify, redirect, request, render_template, make_response
 from app import app
 from .database import connect_to_db, create_new_room, disconnect_db
 from .database import get_all_songs, check_table_exists, fetch_current_songs
-from .database import add_new_song, delete_table, get_next_song
+from .database import add_new_song, delete_table, get_next_song, delete_song
 
 
 @app.route('/health/')
@@ -36,7 +36,6 @@ def queue_song():
     """
     Add a song to the queue
     """
-
     room = request.values['room']
     # song = 'https://youtube.com/watch?v='
     song = request.values['song_url']
@@ -85,6 +84,14 @@ def pop_song():
     get_next_song(conn, room_id)
     disconnect_db(conn)
     return jsonify(status=200)
+
+
+@app.route('/queue/remove/<room>/<vid_id>')
+def remove_song(room, vid_id):
+    conn = connect_to_db()
+    delete_song(conn, room, vid_id)
+    disconnect_db(conn)
+    return redirect('/group/?groupcode={}'.format(room))
 
 
 
