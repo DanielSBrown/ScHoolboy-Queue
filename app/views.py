@@ -127,7 +127,7 @@ def user_profile():
     """ Do we need this? I don't know how persistent groups will be """
     name = request.cookies.get('name')
     # password = request.cookies.get('password')
-    return render_template('profile.html', name=name)
+    return render_template('entercode.html', name=name)
 
 # cookie is set after sign up or log in
 @app.route('/setcookie/', methods=['POST', 'GET'])
@@ -136,7 +136,7 @@ def setcookie():
     if request.method == 'POST':
         name = request.form['username']
         password = request.form['password']
-        resp = make_response(render_template('profile.html'))
+        resp = make_response(render_template('entercode.html'))
         resp.set_cookie('name', name)
         resp.set_cookie('password', password)
         return redirect('/profile/')
