@@ -3,7 +3,7 @@ VTHacks IV -- Team Fully Torged
 ### Team: FULLY TORGED
 
 ## Purpose
-Every single person has a unique taste in music, so this can sometimes be a point of frustration when you are with other people and only listening to music that they like.
+Every single person has a unique taste in music, which can sometimes be a point of frustration when you are with other people and only listening to music that they like.
 
 Often, the solution is to have something akin to the Spotify queue. One person has control of the music but others can request songs to be added to be listened to at a later data.
 
@@ -24,7 +24,7 @@ With a central web server that communicates with distributed nodes in the form o
 The application consists of two integral parts:
 
 1. [A centralized web site](www.ScHoolboyQueue.org/) used to manage the queues for the individual rooms
-1. Distributed rooms/nodes that handle the playing on the music 
+1. Distributed rooms/nodes that handle the playing of the music 
 
 ### Running
 
@@ -71,4 +71,4 @@ Opportunities For Growth
 1. Package cli to distribute with pip
 
 # Disclaimer
-The Team who built ScHoolboy Queue do not condone any use of this application to illegally download licensed music
+The Team who built ScHoolboy Queue does not condone any use of this application to illegally download licensed music.
