@@ -15,6 +15,7 @@ def healthcheck():
     """ Endpoint to make sure the webapp is healthy """
     return 'Healthy\n', 200
 
+
 @app.route('/room/new/', methods=['POST'])
 def new_room():
     """
@@ -34,10 +35,9 @@ def new_room():
 @app.route('/room/add/', methods=['POST'])
 def queue_song():
     """
-    Add a song to the queue
+    Add a song to the queue for the specified roo,
     """
     room = request.values['room']
-    # song = 'https://youtube.com/watch?v='
     song = request.values['song_url']
     conn = connect_to_db()
     add_new_song(conn, room, song)
@@ -79,6 +79,9 @@ def queued():
 
 @app.route('/room/pop/', methods=['POST'])
 def pop_song():
+    '''
+    Deletes the next song from the queue
+    '''
     room_id = request.values['room']
     conn = connect_to_db()
     get_next_song(conn, room_id)
@@ -88,6 +91,9 @@ def pop_song():
 
 @app.route('/queue/remove/<room>/<vid_id>')
 def remove_song(room, vid_id):
+    '''
+    Removes all instances of a given song from the queue
+    '''
     conn = connect_to_db()
     delete_song(conn, room, vid_id)
     disconnect_db(conn)

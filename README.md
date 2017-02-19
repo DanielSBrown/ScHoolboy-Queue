@@ -10,7 +10,7 @@ Often, the solution is to have something akin to the Spotify queue. One person h
 While this is often manageable between friends, there are still several pain points:
 
 1. Someone often needs to give up their phone to play music from
-⋅⋅* If they keep their phone locked they will need to be continually asked to unlock it
+1. If they keep their phone locked they will need to be continually asked to unlock it
 1. The content is limited by the library of the streaming provider
 1. Generally only a single person can queue up music at a time
 1. Everyone who has access to the queue has the ability to rearrage or remove anything they want
@@ -69,6 +69,8 @@ Opportunities For Growth
 1. Ability to rearrange queue, beyond just deleting items
 1. Ability to save and share playlists
 1. Package cli to distribute with pip
+1. Download songs asynchronously
+1. Use AJAX to automatically update Queue page
 
 # Disclaimer
 The Team who built ScHoolboy Queue does not condone any use of this application to illegally download licensed music.
