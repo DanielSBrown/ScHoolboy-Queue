@@ -38,8 +38,8 @@ def queue_song():
     """
 
     room = request.values['room']
-    song = 'https://youtube.com/watch?v='
-    song += request.values['song_url']
+    # song = 'https://youtube.com/watch?v='
+    song = request.values['song_url']
     conn = connect_to_db()
     add_new_song(conn, room, song)
     disconnect_db(conn)
@@ -66,6 +66,8 @@ def queued():
     room_id = request.values['room']
     conn = connect_to_db()
     queue = fetch_current_songs(conn, room_id)
+    queue = ['https://www.youtube.com/watch?v={}'.format(song)
+             for song in queue]
     disconnect_db(conn)
     if not queue:
         resp = {'room': room_id, 'current': False, 'next': False}
