@@ -103,7 +103,7 @@ def query():
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     """ Login Page """
-    return render_template('login.html')
+    return redirect('/')
 
 # page when group code entered
 # needs to verify groupcode
@@ -147,4 +147,4 @@ def setcookie():
 @app.route('/signup/')
 def signup():
     """ The landing page for users to sign up """
-    return render_template('signup.html')
+    return redirect('/')
