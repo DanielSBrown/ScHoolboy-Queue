@@ -8,6 +8,7 @@ Every single person has a unique taste in music, so this can sometimes be a poin
 Often, the solution is to have something akin to the Spotify queue. One person has control of the music but others can request songs to be added to be listened to at a later data.
 
 While this is often manageable between friends, there are still several pain points:
+
 1. Someone often needs to give up their phone to play music from
 ..* If they keep their phone locked they will need to be continually asked to unlock it
 1. The content is limited by the library of the streaming provider
@@ -21,6 +22,7 @@ With a central web server that communicates with distributed nodes in the form o
 
 ## Usage
 The application consists of two integral parts:
+
 1. [A centralized web site](www.ScHoolboyQueue.org/) used to manage the queues for the individual rooms
 1. Distributed rooms/nodes that handle the playing on the music 
 
