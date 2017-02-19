@@ -18,7 +18,7 @@ While this is often manageable between friends, there are still several pain poi
 
 The goal of ScHoolboy Queue (sHouts to my mans) is to provide a remotely hosted, collaborative queue/playlist that puts the choice of music in the hands of the crowd, while still maintaining a level of control for the person hosting
 
-With a central web server that communicates with distributed nodes in the form of `rooms,` ScHoolboyQueue allows a user to play a continuous stream of music straight from YouTube.
+With a central web server that communicates with distributed nodes in the form of `rooms`, ScHoolboyQueue allows a user to play a continuous stream of music straight from YouTube.
 
 ## Usage
 The application consists of two integral parts:
