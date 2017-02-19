@@ -38,7 +38,7 @@ def queue_song():
     """
 
     room = request.values['room']
-    song = 'youtube.com/watch?v='
+    song = 'https://youtube.com/watch?v='
     song += request.values['song_url']
     conn = connect_to_db()
     add_new_song(conn, room, song)
@@ -82,7 +82,7 @@ def pop_song():
     conn = connect_to_db()
     get_next_song(conn, room_id)
     disconnect_db(conn)
-    return 200
+    return jsonify(status=200)
 
 
 
